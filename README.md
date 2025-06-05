@@ -1,1 +1,1 @@
-# Programa-o-Competitiva
+# Programacao-Competitiva
