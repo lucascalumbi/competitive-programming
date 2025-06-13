@@ -16,21 +16,29 @@ using namespace std;
 #define fi first
 #define se second
 #define pb push_back
-#define sz size()
+#define sz(v) (int)v.size()
 
-typedef long long ll;
 typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
 typedef vector<int> vi;
+typedef long long ll;
 
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main()
 {_
-
+	int t; cin >> t;
+	while(t--){
+		string w; cin >> w;
+		string r = "";
+		rep(i,0,sz(w)-2)
+			r+=w[i];
+		r+='i';
+		cout << r << endl;
+	}
 
 
 	return EXIT_SUCCESS;
 }
+
 
