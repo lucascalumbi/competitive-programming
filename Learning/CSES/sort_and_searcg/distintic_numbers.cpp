@@ -16,6 +16,7 @@ using namespace std;
 #define fi first
 #define se second
 #define pb push_back
+#define sz size()
 
 typedef long long ll;
 typedef pair<int, int> pii;
@@ -27,9 +28,14 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main()
 {_
+    int n; cin >> n;
+    map<int,int> m;
+    
+    rep(i,0,n){
+        int x; cin >> x;
+        m[x]++;
+    }
+    cout << m.size() << endl;
 
-
-
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
-

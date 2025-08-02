@@ -16,6 +16,7 @@ using namespace std;
 #define fi first
 #define se second
 #define pb push_back
+#define sz size()
 
 typedef long long ll;
 typedef pair<int, int> pii;
@@ -27,9 +28,31 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main()
 {_
+    int n, x; cin >> n >> x; 
+    
+    vi v(n); 
+    rep(i,0,n) cin >> v[i];
 
+    sort(all(v));
 
+    int in = 0, fim = n - 1, r = 0;
+    
+    while (fim >= in)
+    {
+        if(v[fim] > x){
+            fim--;
+        }else if(v[fim] == x || v[fim] + v[in] > x){
+            r++;
+            fim--;
+        }else {
+            r++;
+            fim--;
+            in++;
+        }
+    }
 
-	return EXIT_SUCCESS;
+    cout << r << endl;
+    
+
+    return EXIT_SUCCESS;
 }
-
