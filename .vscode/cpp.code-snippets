@@ -42,7 +42,7 @@
       "",
       "int main(){ fofo",
       "",
-      "    $1",
+      "    $0",
       "",
       "    return EXIT_SUCCESS;",
       "}"
