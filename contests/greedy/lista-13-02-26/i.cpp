@@ -35,30 +35,29 @@ ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
 int main(){ fofo
 
-    int t; cin >> t;
-    
-    while(t--){
-        pii prev = {0,0};
-        pii next = prev;
-        set<pair<pii,pii>> s; 
-        string path; cin >> path;
-        int ans = 0;
-        rep(i,0,path.size()){
-            char c = path[i];
-            if(c == 'N') next.se++;
-            if(c == 'S') next.se--;
-            if(c == 'E') next.fi++;
-            if(c == 'W') next.fi--;
-            if(s.count({prev,next})){
-                ans++;
-            } else {
-                ans+=5;
-                s.insert({prev,next});
-                s.insert({next,prev});
-            }
-            prev = next;
+    int n,q; cin >> n >> q;
+    vi v[n+1];
+    rep(i,0,n+1)
+        v[i].pb(0);
+    rep(i,1,n+1)
+        v[0].pb(0);
+    rep(i,1,n+1){
+        rep(j,1,n+1){
+            char c; cin >> c;
+            v[i].pb(v[i][j-1] + (c == '*' ? 1 : 0));
         }
-        cout << ans << endl;
+    }
+
+    //dbg2D(v);
+
+    while(q--){
+        int y1,x1,y2,x2;
+        cin >> y1 >> x1 >> y2 >> x2;
+        ll sum = 0;
+        rep(i,y1,y2+1){
+            sum += v[i][x2] - v[i][x1-1]; 
+        }
+        cout << sum << endl;
     }
 
     return EXIT_SUCCESS;

@@ -35,31 +35,22 @@ ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
 int main(){ fofo
 
-    int t; cin >> t;
-    
-    while(t--){
-        pii prev = {0,0};
-        pii next = prev;
-        set<pair<pii,pii>> s; 
-        string path; cin >> path;
-        int ans = 0;
-        rep(i,0,path.size()){
-            char c = path[i];
-            if(c == 'N') next.se++;
-            if(c == 'S') next.se--;
-            if(c == 'E') next.fi++;
-            if(c == 'W') next.fi--;
-            if(s.count({prev,next})){
-                ans++;
-            } else {
-                ans+=5;
-                s.insert({prev,next});
-                s.insert({next,prev});
-            }
-            prev = next;
-        }
-        cout << ans << endl;
+    int n,x; cin >> n >> x;
+    vector<pii> v(n);
+    for(auto& [h,s] : v)
+        cin >> h;
+    for(auto& [h,s] : v)
+        cin >> s;
+
+    vll dp(x+1);
+    for(auto& [h,s] : v){
+        //dbgvec(dp);
+        per(i,h,x+1)
+            dp[i] = max(dp[i],s + dp[i-h]);
     }
+    //dbgvec(dp);
+
+    cout << dp[x] << endl;
 
     return EXIT_SUCCESS;
 }

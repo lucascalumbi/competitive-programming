@@ -21,6 +21,8 @@ typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 typedef vector<int> vi;
 typedef vector<ll> vll;
+typedef vector<pii> vpii;
+typedef vector<pll> vpll;
 
 const int INF  = 0x3f3f3f3f;
 const ll  LINF = 0x3f3f3f3f3f3f3f3fLL;
@@ -33,33 +35,32 @@ const double PI   = acos(-1.0);
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
+ll maxll(ll a, ll b){
+    return a > b ? a : b;
+}
+
 int main(){ fofo
 
-    int t; cin >> t;
-    
-    while(t--){
-        pii prev = {0,0};
-        pii next = prev;
-        set<pair<pii,pii>> s; 
-        string path; cin >> path;
-        int ans = 0;
-        rep(i,0,path.size()){
-            char c = path[i];
-            if(c == 'N') next.se++;
-            if(c == 'S') next.se--;
-            if(c == 'E') next.fi++;
-            if(c == 'W') next.fi--;
-            if(s.count({prev,next})){
-                ans++;
-            } else {
-                ans+=5;
-                s.insert({prev,next});
-                s.insert({next,prev});
-            }
-            prev = next;
-        }
-        cout << ans << endl;
+    int n; cin >> n;
+    vector<pii> v(2*n);
+
+    rep(i,0,2*n){
+        pii p;
+        cin >> p.fi;
+        p.se = i%2==0 ? 1 : -1;
+        v.push_back(p);
     }
+
+    sort(all(v));
+
+    int m = -1;
+    int c = 0;
+    for(auto [x,y] : v){
+        c+=y;
+        m = max(m,c);
+    }
+
+    cout << m << endl;
 
     return EXIT_SUCCESS;
 }

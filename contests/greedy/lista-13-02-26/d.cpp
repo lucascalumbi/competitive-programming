@@ -35,31 +35,26 @@ ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
 int main(){ fofo
 
-    int t; cin >> t;
-    
-    while(t--){
-        pii prev = {0,0};
-        pii next = prev;
-        set<pair<pii,pii>> s; 
-        string path; cin >> path;
-        int ans = 0;
-        rep(i,0,path.size()){
-            char c = path[i];
-            if(c == 'N') next.se++;
-            if(c == 'S') next.se--;
-            if(c == 'E') next.fi++;
-            if(c == 'W') next.fi--;
-            if(s.count({prev,next})){
-                ans++;
-            } else {
-                ans+=5;
-                s.insert({prev,next});
-                s.insert({next,prev});
-            }
-            prev = next;
-        }
-        cout << ans << endl;
+    ll n, x; cin >> n >> x;
+    vll v(n);
+    for(auto& k : v)
+        cin >> k;
+
+    map<ll,ll> m;
+    m[0] = 1;
+
+    ll sum = 0, ans = 0;
+    rep(i,0,n){
+        sum+=v[i];
+        ans += m[sum - x];
+        m[sum]++;
     }
+    
+    cout << ans << endl;
+
+    // for(auto it = m.begin(); it != m.end(); it++){
+    //     cout << it->fi << " " << it->se << endl;
+    // }
 
     return EXIT_SUCCESS;
 }

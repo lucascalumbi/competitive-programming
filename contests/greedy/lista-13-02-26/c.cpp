@@ -21,6 +21,8 @@ typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 typedef vector<int> vi;
 typedef vector<ll> vll;
+typedef vector<pii> vpii;
+typedef vector<pll> vpll;
 
 const int INF  = 0x3f3f3f3f;
 const ll  LINF = 0x3f3f3f3f3f3f3f3fLL;
@@ -33,33 +35,51 @@ const double PI   = acos(-1.0);
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 
+vector<vi> v;
+vi vis;
+
+int dfs(int s, int c){
+    vis[s] = c;
+    int acc = 1;
+    for(auto i : v[s]){
+        if(vis[i] == 0)
+            acc = min(acc,dfs(i, c%2 +1));
+        if(vis[i] == c){
+            return 0;
+        }
+    }
+    return acc;
+}
+
 int main(){ fofo
 
-    int t; cin >> t;
-    
-    while(t--){
-        pii prev = {0,0};
-        pii next = prev;
-        set<pair<pii,pii>> s; 
-        string path; cin >> path;
-        int ans = 0;
-        rep(i,0,path.size()){
-            char c = path[i];
-            if(c == 'N') next.se++;
-            if(c == 'S') next.se--;
-            if(c == 'E') next.fi++;
-            if(c == 'W') next.fi--;
-            if(s.count({prev,next})){
-                ans++;
-            } else {
-                ans+=5;
-                s.insert({prev,next});
-                s.insert({next,prev});
-            }
-            prev = next;
-        }
-        cout << ans << endl;
+    int n, m; cin >> n >> m;
+    vis = vi(n+1,0);
+    v = vector<vi>(n+1, vi());
+    rep(i,0,m){
+        int a, b; cin >> a >> b;
+        v[a].pb(b);
+        v[b].pb(a);
     }
+
+    int k = 1;
+    rep(i,1,n+1){
+        if(vis[i] == 0){
+            k = dfs(i,1);
+            if(k == 0){
+                break;
+            }
+        }
+    }
+
+    if(k){
+        rep(i,1,n+1)
+            cout << vis[i] << " ";
+        cout << endl;
+    }
+    else
+        cout << "IMPOSSIBLE" << endl;
+    
 
     return EXIT_SUCCESS;
 }
