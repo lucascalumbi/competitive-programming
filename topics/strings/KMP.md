@@ -2,7 +2,7 @@
 # Knuth-Morris-Pratt Algorithm
 
 KMP é um algoritmo que usa a estrutura do [[LPS]] para comparação de strings.
-
+[]()
 Para duas strings `s` de tamanho `m` e `r` de tamanho `n`, a complexidade do KMP será O(n+m)
 
 # Implementação (C++)
